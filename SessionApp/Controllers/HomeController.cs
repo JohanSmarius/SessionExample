@@ -1,0 +1,61 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using SessionApp.Infrastructure;
+using SessionApp.Models;
+
+namespace SessionApp.Controllers
+{
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public IActionResult AddProduct()
+        {
+            return View();
+        }
+
+        public IActionResult AddProduct(Product product)
+        {
+            HttpContext.Session.SetJson("ShoppingCart", product);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult ShoppingCart()
+        {
+            var product = HttpContext.Session.GetJson<Product>("ShoppingCart");
+
+            return View(product);
+
+        }
+    }
+}

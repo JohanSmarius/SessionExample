@@ -1,0 +1,24 @@
+﻿@model Product
+
+<div>
+    <div>
+        <form asp-action="AddProduct" method="post">
+
+            <div class="form-group">
+                <label asp-for="Name">Naam product:</label>
+                <input class="form-control" asp-for="Name" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Quantity">Aantal:</label>
+                <input class="form-control" asp-for="Quantity" />
+            </div>
+
+
+            <div class="form-group row">
+                <button class="btn btn-primary col-sm-4 text-center">Voeg product toe aan winkelwagen</button>
+            </div>
+        </form>
+    </div>
+</div>
+

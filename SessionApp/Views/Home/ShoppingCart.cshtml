@@ -1,0 +1,13 @@
+﻿@model Product
+
+<h1>Order</h1>
+
+@if (@Model != null)
+{
+    <div>@Model?.Name</div>
+    <div>@Model?.Quantity</div>
+}
+else
+{
+    @: No product in cart
+}
